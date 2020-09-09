@@ -40,3 +40,20 @@ var questions = [
     answerId: 1,
   },
 ];
+
+// variables setting
+
+// TODO: scoreboard, timer
+
+var score = 0;
+var timerLeft = 0;
+var timer;
+
+// start the countdown timer
+
+function start() {
+  timerLeft = 75;
+  $(#timerLeft);
+
+  setInterval(() => {}, 1000);
+}
