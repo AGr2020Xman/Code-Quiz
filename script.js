@@ -43,7 +43,7 @@ var questions = [
   },
   {
     title:
-      "A very useful tool used during development and debugging for printing content to the degugger is:",
+      "A very useful tool used during development and debugging for printing content to the debugger is:",
     choices: [
       { id: 1, displayText: "JavaScript" },
       { id: 2, displayText: "terminal/bash" },
@@ -185,6 +185,11 @@ var showFeedback = (isCorrectAnswer) => {
 
 var displayFinalScreen = () => {
   endTimer();
+  timeRemaining.text(timerCountdown);
+  yourScore.text(timerCountdown);
+  if (timerCountdown < 0) {
+    timerCountdown = 0;
+  }
   showScreen("finalScreen");
 };
 
@@ -201,11 +206,13 @@ var startTimer = () => {
 
 var endTimer = () => {
   clearInterval(interval);
+  timeRemaining.text(timerCountdown);
 };
 
 var getHighscoreHistory = () => {
   // clear highscore board
   scoreList.empty();
+  debugger;
   if (localStorage.getItem("viewHighscores")) {
     highscoreHistoryStorage = JSON.parse(
       localStorage.getItem("viewHighscores")
@@ -215,6 +222,7 @@ var getHighscoreHistory = () => {
       b.viewHighscores - a.viewHighscores;
     });
   }
+  debugger;
   // for EACH item and index, create entry under scoreList with target-able classes
   highscoreHistoryStorage.forEach((item, index) => {
     var itemValue = $(
@@ -228,7 +236,6 @@ var getHighscoreHistory = () => {
 };
 
 showScreen("start");
-localStorage.setItem("viewHighscores", JSON.stringify([]));
 getHighscoreHistory();
 
 // user presses start quiz button
