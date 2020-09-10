@@ -104,6 +104,8 @@ var startQuiz = () => {
   start.addClass("fade");
   // reveal questions
   questionScreen.addClass("active");
+  // start timer
+  startTimer();
   // displayQuestion function to currentQuestion
   displayQuestion();
   // currentQuestion = displayQuestion(currentQuestion);
@@ -128,27 +130,28 @@ var startQuiz = () => {
 //   });
 
 // THIS MIGHT HELP CONNECT THE start AND displayQuestion functions
-var compare = (event) => {
-  var answerElement = event.target;
-  if (answerElement.matches("button")) {
-    // var createCorrect = document.createElement("div");
-    // createCorrect.setAttribute("id", "createCorrect");
-    // if (answerElement.textContent == questions[currentQuestion].answerId) {
-      timerCountdown += 5;
-      // createCorrect.textContent = "Correct!";
-    } else {
-      timeRemaining = timeRemaining - penalty;
-      // createCorrect.textContent = "Incorrect!";
-    }
-  }
-  currentQuestion++;
-};
+// var compare = (event) => {
+//   var answerElement = event.target;
+//   if (answerElement.matches("button")) {
+//     // var createCorrect = document.createElement("div");
+//     // createCorrect.setAttribute("id", "createCorrect");
+//     // if (answerElement.textContent == questions[currentQuestion].answerId) {
+//       timerCountdown += 5;
+//       // createCorrect.textContent = "Correct!";
+//     } else {
+//       timeRemaining = timeRemaining - penalty;
+//       // createCorrect.textContent = "Incorrect!";
+//     }
+//   }
+//   currentQuestion++;
+// };
 
 // displayQuestion function defined
 var displayQuestion = () => {
-
-  var question = questions[currentQuestion]
-  if (question){
+  // find out if previous answer is true/false
+  resolvePreviousAnswer(true);
+  var question = questions[currentQuestion];
+  if (question) {
     populateQuestionHTML(question);
   } else {
     displayFinalScreen();
@@ -156,22 +159,31 @@ var displayQuestion = () => {
 };
 
 var populateQuestionHTML = (question) => {
-  
-  questionTitle.text(questions[currentQuestion].title);
+  questionTitle.text(question.title);
   next.empty();
 
-  questions[currentQuestion].choices.forEach((item, index) => {
-    var answer = $(`<button class="answer">${index + 1}. ${item.displayText}</button>`);
+  question.choices.forEach((item, index) => {
+    var answer = $(
+      `<button class="answer">${index + 1}. ${item.displayText}</button>`
+    );
     next.append(answer);
-  })
+  });
 };
 
 var displayFinalScreen = () => {
-  
-}
+  endTimer();
+};
 
+var resolvePreviousAnswer = (wasThatCorrect) => {
+  // HTML to display CORRECT or INCORRECT
+  if (wasThatCorrect) {
+    // display CORRECT in DOMS
+  } else {
+    // display INCORRECT in DOMS + apply penalty?
+  }
+};
 
-  //
+//
 //   debugger;
 
 //   if (currentQuestion <= questions.length - 1) {
@@ -209,6 +221,9 @@ var displayFinalScreen = () => {
 startButton.on("click", function () {
   // startquiz function hides start screen and shows questions module
   startQuiz();
+});
+
+var startTimer = () => {
   interval = setInterval(() => {
     if (timerCountdown <= 0) {
       timerCountdown = 0;
@@ -217,7 +232,11 @@ startButton.on("click", function () {
     timerCountdown--;
     timeRemaining.text(timerCountdown);
   }, 1000);
-});
+};
+
+var endTimer = () => {
+  clearInterval(interval);
+};
 
 // submitting scores
 
