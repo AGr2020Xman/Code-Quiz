@@ -55,7 +55,6 @@ var questions = [
 ];
 
 // things I need to target (with jQuery)
-
 // link to View Highscores
 let viewHighscores = $("#highscores");
 // Countdown value
@@ -98,6 +97,7 @@ var interval;
 var currentQuestion = 0;
 var penalty = 5;
 
+// show/hide screens responsively to stage of quiz
 var showScreen = (name) => {
   if (name == "start") {
     start.show();
@@ -121,20 +121,27 @@ var showScreen = (name) => {
   }
 };
 
+// start quiz function
 var startQuiz = () => {
   // hide starting screen
-  // reveal questions
   showScreen("questionScreen");
-  currentQuestion = 0;
-  timerCountdown = questions.length * 15;
+  // reset default settings to reset quiz
+  resetDefault();
   // start timer
   startTimer();
   // displayQuestion function to currentQuestion
   displayQuestion();
 };
 
+// variable quiz defaults
+var resetDefault = () => {
+  currentQuestion = 0;
+  timerCountdown = questions.length * 15;
+};
+
 // displayQuestion function defined
 var displayQuestion = () => {
+  // set questions to draw from questions index
   var question = questions[currentQuestion];
   if (question) {
     populateQuestionHTML(question);
@@ -143,6 +150,7 @@ var displayQuestion = () => {
   }
 };
 
+//
 var populateQuestionHTML = (question) => {
   questionTitle.text(question.title);
   next.empty();
@@ -175,6 +183,7 @@ var showFeedback = (isCorrectAnswer) => {
   let correctFeedback = $("#correct");
   let incorrectFeedback = $("#incorrect");
 
+  // flash result of previous answer
   if (isCorrectAnswer) {
     correctFeedback.show().fadeOut(1000);
     incorrectFeedback.hide();
@@ -184,6 +193,7 @@ var showFeedback = (isCorrectAnswer) => {
   }
 };
 
+// display final screen - stop counters - if counter <0, return to 0 which is minimum score
 var displayFinalScreen = () => {
   endTimer();
   timeRemaining.text(timerCountdown);
@@ -194,6 +204,7 @@ var displayFinalScreen = () => {
   showScreen("finalScreen");
 };
 
+// start the timer
 var startTimer = () => {
   timeRemaining.text(timerCountdown);
   interval = setInterval(() => {
@@ -206,14 +217,17 @@ var startTimer = () => {
   }, 1000);
 };
 
+// cease the timer - ensure the timeRemaining is = to the countdown
 var endTimer = () => {
   clearInterval(interval);
   timeRemaining.text(timerCountdown);
 };
 
+// get the highscore history function
 var getHighscoreHistory = () => {
-  // clear highscore board
+  // clear highscore element
   scoreList.empty();
+  // JSON parse
   if (localStorage.getItem("viewHighscores")) {
     highscoreHistoryStorage = JSON.parse(
       localStorage.getItem("viewHighscores")
@@ -236,6 +250,7 @@ var getHighscoreHistory = () => {
   });
 };
 
+// opening functions - show the start screen - get the current highscore history
 showScreen("start");
 getHighscoreHistory();
 
@@ -270,16 +285,16 @@ submit.on("click", function () {
     // call stored data from local storage
     getHighscoreHistory();
   }
-  // remove the final screen page
 });
 
-// programming onclick button functions to reveal/hide the corresponding article on page
+// view HS button
 viewHighscores.on("click", function () {
   showScreen("highscoreHistory");
   endTimer();
   timerCountdown = 0;
 });
 
+// Back to start button
 goBack.on("click", function () {
   showScreen("start");
   timerCountdown = 0;
@@ -291,5 +306,3 @@ clearHighscore.on("click", function () {
   localStorage.setItem("viewHighscores", JSON.stringify([]));
   getHighscoreHistory();
 });
-
-// End HighScore History section
