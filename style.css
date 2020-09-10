@@ -1,4 +1,4 @@
-.start.fade {
+/* .start.fade {
     display: none;
 }
 
@@ -6,6 +6,12 @@
     display: none;
 }
 
-.highscore-history.active {}
+.highscore-history {
+    display: none;
+}
 
-)
+.highscore-history.active {
+    
+}
+
+) */

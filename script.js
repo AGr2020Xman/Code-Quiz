@@ -99,6 +99,29 @@ var penalty = 5;
 
 // start quiz function defined
 
+var showScreen = (name) => {
+  if (name == "start") {
+    start.show();
+  } else {
+    start.hide();
+  }
+  if (name == "scoreList") {
+    scoreList.show();
+  } else {
+    scoreList.hide();
+  }
+  if (name == "questionScreen") {
+    questionScreen.show();
+  } else {
+    questionScreen.hide();
+  }
+  if (name == "finalScreen") {
+    finalScreen.show();
+  } else {
+    finalScreen.hide();
+  }
+};
+
 var startQuiz = () => {
   // hide starting screen
   start.addClass("fade");
@@ -129,27 +152,8 @@ var startQuiz = () => {
 //     next.append(answer);
 //   });
 
-// THIS MIGHT HELP CONNECT THE start AND displayQuestion functions
-// var compare = (event) => {
-//   var answerElement = event.target;
-//   if (answerElement.matches("button")) {
-//     // var createCorrect = document.createElement("div");
-//     // createCorrect.setAttribute("id", "createCorrect");
-//     // if (answerElement.textContent == questions[currentQuestion].answerId) {
-//       timerCountdown += 5;
-//       // createCorrect.textContent = "Correct!";
-//     } else {
-//       timeRemaining = timeRemaining - penalty;
-//       // createCorrect.textContent = "Incorrect!";
-//     }
-//   }
-//   currentQuestion++;
-// };
-
 // displayQuestion function defined
 var displayQuestion = () => {
-  // find out if previous answer is true/false
-  resolvePreviousAnswer(true);
   var question = questions[currentQuestion];
   if (question) {
     populateQuestionHTML(question);
@@ -166,7 +170,24 @@ var populateQuestionHTML = (question) => {
     var answer = $(
       `<button class="answer">${index + 1}. ${item.displayText}</button>`
     );
-    answer.on("click", clickAnswer);
+    // WHEN answer btn is clicked
+    answer.on("click", function () {
+      // THEN check if the answer user selected is CORRECT or not
+      isCorrectAnswer = question.answerId !== item.id;
+      if (isCorrectAnswer) {
+        correctFlash = $('<div class="flash">Correct!</div>');
+        questionScreen.append(correctFlash);
+      } else {
+        // IF answer is incorrect - penalise time (10s)
+        timerCountdown -= 10;
+        incorrectFlash = $('<div class="flash">Incorrect</div>');
+        questionScreen.append(incorrectFlash);
+      }
+
+      // REGARDLESS of correct/incorrect - displayNextQuestion
+      currentQuestion++;
+      displayQuestion();
+    });
     next.append(answer);
   });
 };
@@ -182,24 +203,20 @@ var populateQuestionHTML = (question) => {
 // User prompted to save highscore
 // may view sorted scores list OR go back to start and try again
 
-var clickAnswer = (answer) => {
-  console.log(answer);
-};
-
 var displayFinalScreen = () => {
   endTimer();
 };
 
 var resolvePreviousAnswer = (wasThatCorrect) => {
   // HTML to display CORRECT or INCORRECT
-  if (wasThatCorrect) {
+  if (question.answerId === item.id) {
+    $("#");
     correctFlash = $('<div class="flash">Correct!</div>');
     questionScreen.append(correctFlash);
   } else {
     // display INCORRECT in DOMS + apply penalty?
     incorrectFlash = $('<div class="flash">Incorrect!</div>');
     questionScreen.append(incorrectFlash);
-    timerCountdown -= 5;
   }
 };
 
