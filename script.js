@@ -17,7 +17,7 @@ var questions = [
       { id: 3, diplayText: "3" },
       { id: 4, diplayText: "4" },
     ],
-    answerId: 1,
+    answerId: 2,
   },
   {
     title: "Dummy text",
@@ -27,7 +27,7 @@ var questions = [
       { id: 3, diplayText: "3" },
       { id: 4, diplayText: "4" },
     ],
-    answerId: 1,
+    answerId: 3,
   },
   {
     title: "Dummy text",
@@ -37,7 +37,7 @@ var questions = [
       { id: 3, diplayText: "3" },
       { id: 4, diplayText: "4" },
     ],
-    answerId: 1,
+    answerId: 4,
   },
 ];
 
@@ -52,8 +52,12 @@ var timer;
 // start the countdown timer
 
 function start() {
-  timerLeft = 75;
-  $(#timerLeft);
+  timerLeft = 90;
+  $("#timerLeft");
 
   setInterval(() => {}, 1000);
 }
+
+// start button () => { launches quiz and begins timer ( 90s ) => }
+// HTML visually to change from "Welcome Screen" to "Question 1"
+// Set layout to have changeable div... probably need BLAH.innerHTML . maybe appendChild....
