@@ -92,8 +92,117 @@ let clearHighscore = $("#clear-scores");
 var highscoreHistoryStorage = [];
 // time to be relative to the QUESTIONS - therefore increasing questions in future = more time
 var timerCountdown = questions.length * 20;
-var currentQuestion = 0;
 var interval;
+
+
+// starting quiz section
+  
+  
+  
+  // start quiz function defined
+  var startQuiz = () => {
+    // hide starting screen
+    start.addClass("fade");
+  // reveal questions
+  question.addClass("active");
+  // nextQuestion function to currentQuestion
+  nextQuestion(currentQuestion);
+};
+
+
+  
+var currentQuestion;
+for (i )
+
+
+// how to access an Object
+// accessible directly in HTML
+questionTitle = questions[i].title
+// created entried in HTML
+answer 
+
+
+// nextQuestion function defined
+var nextQuestion = () => {
+  // 
+  if (number <= questions.length - 1) {
+    questionTitle.text(questions[number].title);
+    next.empty();
+    
+    questions[number].choices.forEach((item, index) => {
+      var answer = $(`<button class="answer">${index + 1}. ${item}</button>`);
+      next.append(answer);
+    });
+  } else {
+    question.removeClass("active");
+    finalScreen.addClass("active");
+    clearInterval(interval);
+    if (timerCountdown < 0) {
+      timeRemaining.text(0);
+      yourScore.text(0);
+    } else {
+      yourScore.text(timerCountdown);
+      timeRemaining.text(timerCountdown);
+    }
+  }
+};
+
+// TO ADD SOUNDS [might get time/too hard] - NEEDS THIS with a conditional 
+
+// // $(document).on('click','.answer', function() {
+//   if (this.innerText.slice(3,this.innerText.length) === questions[currentQuestion].answer)
+// })
+
+
+
+
+// user presses start quiz button
+startButton.on('click', function() {
+  // startquiz function hides start screen and shows questions module
+  startQuiz();
+  interval = setInterval(() => {
+    if (timerCountdown <=0) {
+      timerCountdown = 0;
+      return
+    }
+    timerCountdown--;
+    timeRemaining.text(timerCountdown);
+  }, 1000);
+});
+
+// submitting scores
+
+submit.on('click', function() {
+  // if score has gone negative intger due to incorrect answers, reset to 0, minimum score
+  if (timerCountdown < 0) {
+    timerCountdown = 0;
+  }
+  // if initials are recorded (even if blank)
+  if (initialsInput.val()){
+    // push to storage array as an object recording name: and Highscore: time
+    highscoreHistoryStorage.push({name: initialsInput.val(), viewHighscores: timerCountdown});
+    // clear input
+    initialsInput.val('');
+    // send score to local storage, stringify for proper storage
+    localStorage.setItem('viewHighscore', JSON.stringify(highscoreHistoryStorage))
+    // show history of stored scores
+    highscoreHistory.addClass('active');
+    // call stored data from local storage
+    getHighscoreHistory();
+  }
+  // remove the final screen page
+  finalScreen.removeClass('active');
+  // allow the start screen to return
+  start.removeClass('fade');
+  currentQuestion = 0 //DEPENDENT ON HOW LOOPING WORKS FOR ACCESSING INDEXED OBJECTS //
+  timerCountdown = questions.length * 20;
+  timeRemaining.text(0);
+});
+
+
+// ending quiz section
+
+
 
 // HighScore History section
 
@@ -101,90 +210,42 @@ var interval;
 localStorage.setItem("viewHighscores", JSON.stringify([]));
 
 // get locally stored scores function expressed
-getHighscoreHistory = () => {
+var getHighscoreHistory = () => {
   // clear highscore board
   scoreList.empty();
   if (localStorage.getItem("viewHighscores")) {
     highscoreHistoryStorage = JSON.parse(
       localStorage.getItem("viewHighscores")
-    );
-    // compare function parameter in .sort() function to organise score values
-    highscoreHistoryStorage.sort((a, b) => {
-      b.viewHighscores - a.viewHighscores;
-    });
-  }
-  // for EACH item and index, create entry under scoreList with target-able classes
+      );
+      // compare function parameter in .sort() function to organise score values
+      highscoreHistoryStorage.sort((a, b) => {
+        b.viewHighscores - a.viewHighscores;
+      });
+    }
+    // for EACH item and index, create entry under scoreList with target-able classes
   highscoreHistoryStorage.forEach((item, index) => {
     var itemValue = $(
-      '<div class="highscoreItem">${index + 1}. ${item.name} <span class="savedScore">${item.viewHighscores}</span></div>'
-    );
-    // append to scoreList in the scores section, under the highscoreHistory article
-    $("scoreList").append(itemValue);
-  });
-};
-
-getHighscoreHistory();
-
-// programming onclick button functions to reveal/hide the corresponding article on page
-viewHighscores.on('click', function () {
-  highscoreHistory.addClass('active');
-});
-
-goBack.on('click', function() {
-  highscoreHistory.removeClass('active');
-});
-
-// empty local storage array
-clearHighscore.on('click', function() {
-  localStorage.setItem('viewHighscores', JSON.stringify([]));
-});
-
-// End HighScore History section
-
-// starting quiz section
-
-startQuiz(() => {
-  // hide starting screen
-  start.addClass('fade');
-  // reveal questions
-  question.addClass('active');
-  // nextQuestion function to currentQuestion
-  nextQuestion(currentQuestion);
-});
-
-
-
-nextQuestion(() => {
-  if (number <= questions.length-1){
-    questionTitle.text(questions[number].title);
-    next.empty();
-
-    questions[number].choices.forEach((item,index) => {
-      var answer = $(`<button class="answer">${index + 1}. ${item}</button>`);
-      next.append(answer);
+      `<div class="highscoreItem">${index + 1}. ${item.name} <span class="savedScore">${item.viewHighscores}</span></div>`
+      );
+      // append to scoreList in the scores section, under the highscoreHistory article
+      $("scoreList").append(itemValue);
     });
+  };
   
-
-
-
-// TODO: scoreboard, timer
-
-// function setTimer() {
-//   var timerInterval = setInterval(() => {
-//     timeRemaining--;
-//     timer.textContent("Time: " + timeRemaining);
-
-//     if (timeRemaining <= 0) {
-//       clearInterval(timerInterval);
-//       // stopshowing questions display: none
-//       // display yourScore
-//       yourScore.textContent("Your score: " + secondsLeft);
-//     }
-//   }, interval);
-// }
-
-// start the countdown timer
-
-// start button () => { launches quiz and begins timer ( 90s ) => }
-// HTML visually to change from "Welcome Screen" to "Question 1"
-// Set layout to have changeable div... probably need BLAH.innerHTML . maybe appendChild....
+  getHighscoreHistory();
+  
+  // programming onclick button functions to reveal/hide the corresponding article on page
+  viewHighscores.on("click", function () {
+    highscoreHistory.addClass("active");
+  });
+  
+  goBack.on("click", function () {
+    highscoreHistory.removeClass("active");
+  });
+  
+  // empty local storage array
+  clearHighscore.on("click", function () {
+    localStorage.setItem("viewHighscores", JSON.stringify([]));
+  });
+  
+  // End HighScore History section
