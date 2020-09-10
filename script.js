@@ -282,6 +282,7 @@ viewHighscores.on("click", function () {
 
 goBack.on("click", function () {
   showScreen("start");
+  timerCountdown = 0;
   timeRemaining.text(timerCountdown);
 });
 
