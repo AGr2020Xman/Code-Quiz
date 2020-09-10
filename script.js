@@ -155,13 +155,11 @@ var populateQuestionHTML = (question) => {
       // THEN check if the answer user selected is CORRECT or not
       isCorrectAnswer = question.answerId === item.id;
       if (isCorrectAnswer) {
-        correctFlash = $('<div class="flash">Correct!</div>');
-        questionScreen.append(correctFlash);
+        showFeedback(isCorrectAnswer);
       } else {
         // IF answer is incorrect - penalise time (10s)
+        showFeedback(isCorrectAnswer);
         timerCountdown -= 10;
-        incorrectFlash = $('<div class="flash">Incorrect</div>');
-        questionScreen.append(incorrectFlash);
       }
 
       // REGARDLESS of correct/incorrect - displayNextQuestion
@@ -170,6 +168,19 @@ var populateQuestionHTML = (question) => {
     });
     next.append(answer);
   });
+};
+
+var showFeedback = (isCorrectAnswer) => {
+  let correctFeedback = $("#correct");
+  let incorrectFeedback = $("#incorrect");
+
+  if (isCorrectAnswer) {
+    correctFeedback.show().fadeOut(1000);
+    incorrectFeedback.hide();
+  } else {
+    incorrectFeedback.show().fadeOut(1000);
+    correctFeedback.hide();
+  }
 };
 
 var displayFinalScreen = () => {

@@ -1,17 +1,21 @@
+.flash {
+    display: none;
+}
+
 /* .start.fade {
-    display: none;
-}
-
-.questions.fade {
-    display: none;
-}
-
-.highscore-history {
-    display: none;
-}
-
-.highscore-history.active {
-    
-}
-
-) */
+                display: none;
+            }
+            
+            .questions.fade {
+                display: none;
+            }
+            
+            .highscore-history {
+                display: none;
+            }
+            
+            .highscore-history.active {
+                
+            }
+            
+            */
