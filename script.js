@@ -231,7 +231,7 @@ var getHighscoreHistory = () => {
       } <span class="savedScore">${item.viewHighscores}</span></div>`
     );
     // append to scoreList in the scores section, under the highscoreHistory article
-    $("scoreList").append(itemValue);
+    scoreList.append(itemValue);
   });
 };
 
@@ -261,7 +261,7 @@ submit.on("click", function () {
     initialsInput.val("");
     // send score to local storage, stringify for proper storage
     localStorage.setItem(
-      "viewHighscore",
+      "viewHighscores",
       JSON.stringify(highscoreHistoryStorage)
     );
     // show history of stored scores
@@ -286,6 +286,7 @@ goBack.on("click", function () {
 // empty local storage array
 clearHighscore.on("click", function () {
   localStorage.setItem("viewHighscores", JSON.stringify([]));
+  getHighscoreHistory;
 });
 
 // End HighScore History section
