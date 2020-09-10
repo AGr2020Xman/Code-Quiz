@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Document</title>
+    <link href="./Assets/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <title>The Most Excellent Code Quiz</title>
     <link rel="stylesheet" href="./style.css" />
     <link
       rel="stylesheet"
@@ -16,7 +16,7 @@
 
   <body>
     <nav>
-      <section class="highscore" id="highscores">View Highscores</section>
+      <button class="highscore" id="highscores">View Highscores</button>
       <section class="timer">Time: <span id="time-remaining">0</span></section>
     </nav>
 
@@ -36,8 +36,12 @@
         <section class="titles" id="question-title"></section>
         <section class="next-question" id="next-question-button"></section>
       </div>
-      <div class="flash" id="correct">Correct!</div>
-      <div class="flash" id="incorrect">Incorrect!</div>
+      <div class="flash alert alert-primary" role="alert" id="correct">
+        Correct!
+      </div>
+      <div class="flash alert alert-danger" role="alert" id="incorrect">
+        Incorrect!
+      </div>
     </article>
 
     <article class="end-quiz" id="end-quiz-screen">
