@@ -89,25 +89,55 @@ let clearHighscore = $("#clear-scores");
 
 // variables setting
 
-var highscoreHistory = [];
+var highscoreHistoryStorage = [];
 // time to be relative to the QUESTIONS - therefore increasing questions in future = more time
 var timerCountdown = questions.length * 20;
+var currentQuestion = 0;
+var interval;
+
+// set local storage array
+localStorage.setItem("viewHighscores", JSON.stringify([]));
+
+// get locally stored scores function expressed
+getHighscoreHistory = () => {
+  // clear highscore board
+  scoreList.empty();
+  if (localStorage.getItem("viewHighscores")) {
+    highscoreHistoryStorage = JSON.parse(
+      localStorage.getItem("viewHighscores")
+    );
+    // compare function parameter in .sort() function to organise score values
+    highscoreHistoryStorage.sort((a, b) => {
+      b.viewHighscores - a.viewHighscores;
+    });
+  }
+  // for EACH item and index, create entry under scoreList with target-able classes
+  highscoreHistoryStorage.forEach((item, index) => {
+    var itemValue = $(
+      '<div class="highscoreItem">${index + 1}. ${item.name} <span class="savedScore">${item.viewHighscores}</span></div>'
+    );
+    // append to scoreList in the scores section, under the highscoreHistory article
+    $("scoreList").append(itemValue);
+  });
+};
+
+getHighscoreHistory();
 
 // TODO: scoreboard, timer
 
-function setTimer() {
-  var timerInterval = setInterval(() => {
-    timeRemaining--;
-    timer.textContent("Time: " + timeRemaining);
+// function setTimer() {
+//   var timerInterval = setInterval(() => {
+//     timeRemaining--;
+//     timer.textContent("Time: " + timeRemaining);
 
-    if (timeRemaining <= 0) {
-      clearInterval(timerInterval);
-      // stopshowing questions display: none
-      // display yourScore
-      yourScore.textContent("Your score: " + secondsLeft);
-    }
-  }, interval);
-}
+//     if (timeRemaining <= 0) {
+//       clearInterval(timerInterval);
+//       // stopshowing questions display: none
+//       // display yourScore
+//       yourScore.textContent("Your score: " + secondsLeft);
+//     }
+//   }, interval);
+// }
 
 // start the countdown timer
 
