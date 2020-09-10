@@ -90,14 +90,13 @@ let clearHighscore = $("#clear-scores");
 // variables setting
 
 var highscoreHistoryStorage = [];
+
 // time to be relative to the QUESTIONS - therefore increasing questions in future = more time
 var timerCountdown = questions.length * 20;
+
 var interval;
 var currentQuestion = 0;
 var penalty = 5;
-// starting quiz section
-
-// start quiz function defined
 
 var showScreen = (name) => {
   if (name == "start") {
@@ -105,10 +104,10 @@ var showScreen = (name) => {
   } else {
     start.hide();
   }
-  if (name == "scoreList") {
-    scoreList.show();
+  if (name == "highscoreHistory") {
+    highscoreHistory.show();
   } else {
-    scoreList.hide();
+    highscoreHistory.hide();
   }
   if (name == "questionScreen") {
     questionScreen.show();
@@ -124,33 +123,14 @@ var showScreen = (name) => {
 
 var startQuiz = () => {
   // hide starting screen
-  start.addClass("fade");
   // reveal questions
-  questionScreen.addClass("active");
+  showScreen("questionScreen");
   // start timer
   startTimer();
   // displayQuestion function to currentQuestion
   displayQuestion();
   // currentQuestion = displayQuestion(currentQuestion);
 };
-
-// start quiz >> display question
-// user picks answer >> displayQuestion
-// if no displayQuestion >> Display score & prompt for initials
-// if initials.val() >> save score and display Highscore List
-
-// var displayQuestion = (questionToDisplay) => {
-//   // generic display question
-//   questionTitle.text(questionToDisplay.title);
-//   next.empty();
-
-//   questionToDisplay.choices.forEach((item, index) => {
-
-//     var answer = $(
-//       `<button id=${index} class="answer">${index + 1}. ${item.displayText}</button>`
-//     );
-//     next.append(answer);
-//   });
 
 // displayQuestion function defined
 var displayQuestion = () => {
@@ -192,19 +172,9 @@ var populateQuestionHTML = (question) => {
   });
 };
 
-// Hello Carlin - this is a QUIZ application
-// It is giving me aids
-// I got too complicated and so we have now started subdividing my functions
-// Basic functionality is
-// USER presses start quiz (and a timer starts) > questions come up with answers
-// user selects answer > if correct YAY next question
-// >> if incorrect - BOO lose 5 seconds, next questions
-// after answering last question - Timer STOPS; time = yourScore
-// User prompted to save highscore
-// may view sorted scores list OR go back to start and try again
-
 var displayFinalScreen = () => {
   endTimer();
+  showScreen("finalScreen");
 };
 
 var resolvePreviousAnswer = (wasThatCorrect) => {
@@ -219,46 +189,6 @@ var resolvePreviousAnswer = (wasThatCorrect) => {
     questionScreen.append(incorrectFlash);
   }
 };
-
-//
-//   debugger;
-
-//   if (currentQuestion <= questions.length - 1) {
-//     questionTitle.text(questions[currentQuestion].title);
-//     next.empty();
-
-//     questions[currentQuestion].choices.forEach((item, index) => {
-//       var answer = $(
-//         `<button class="answer">${index + 1}. ${item.displayText}</button>`
-//       );
-//       next.append(answer);
-//     });
-//     $('.answer').on('click',(compare));
-//   } else {
-//     questionScreen.removeClass("active");
-//     finalScreen.addClass("active");
-//     clearInterval(interval);
-//     if (timerCountdown < 0) {
-//       timeRemaining.text(0);
-//       yourScore.text(0);
-//     } else {
-//       yourScore.text(timerCountdown);
-//       timeRemaining.text(timerCountdown);
-//     }
-//   }
-// };
-
-// TO ADD SOUNDS [might get time/too hard] - NEEDS THIS with a conditional
-
-// // $(document).on('click','.answer', function() {
-//   if (this.innerText.slice(3,this.innerText.length) === questions[currentQuestion].answer)
-// })
-
-// user presses start quiz button
-startButton.on("click", function () {
-  // startquiz function hides start screen and shows questions module
-  startQuiz();
-});
 
 var startTimer = () => {
   interval = setInterval(() => {
@@ -275,49 +205,6 @@ var endTimer = () => {
   clearInterval(interval);
 };
 
-// submitting scores
-
-submit.on("click", function () {
-  // if score has gone negative intger due to incorrect answers, reset to 0, minimum score
-  if (timerCountdown < 0) {
-    timerCountdown = 0;
-  }
-  // if initials are recorded (even if blank)
-  if (initialsInput.val()) {
-    // push to storage array as an object recording name: and Highscore: time
-    highscoreHistoryStorage.push({
-      name: initialsInput.val(),
-      viewHighscores: timerCountdown,
-    });
-    // clear input
-    initialsInput.val("");
-    // send score to local storage, stringify for proper storage
-    localStorage.setItem(
-      "viewHighscore",
-      JSON.stringify(highscoreHistoryStorage)
-    );
-    // show history of stored scores
-    highscoreHistory.addClass("active");
-    // call stored data from local storage
-    getHighscoreHistory();
-  }
-  // remove the final screen page
-  finalScreen.removeClass("active");
-  // allow the start screen to return
-  start.removeClass("fade");
-  currentQuestion = 0; //DEPENDENT ON HOW LOOPING WORKS FOR ACCESSING INDEXED OBJECTS //
-  timerCountdown = questions.length * 20;
-  timeRemaining.text(0);
-});
-
-// ending quiz section
-
-// HighScore History section
-
-// set local storage array
-localStorage.setItem("viewHighscores", JSON.stringify([]));
-
-// get locally stored scores function expressed
 var getHighscoreHistory = () => {
   // clear highscore board
   scoreList.empty();
@@ -342,15 +229,53 @@ var getHighscoreHistory = () => {
   });
 };
 
+showScreen("start");
+localStorage.setItem("viewHighscores", JSON.stringify([]));
 getHighscoreHistory();
+
+// user presses start quiz button
+startButton.on("click", function () {
+  // startquiz function hides start screen and shows questions module
+  startQuiz();
+});
+
+// submitting scores
+submit.on("click", function () {
+  // if score has gone negative intger due to incorrect answers, reset to 0, minimum score
+  if (timerCountdown < 0) {
+    timerCountdown = 0;
+  }
+  // if initials are recorded (even if blank)
+  if (initialsInput.val()) {
+    // push to storage array as an object recording name: and Highscore: time
+    highscoreHistoryStorage.push({
+      name: initialsInput.val(),
+      viewHighscores: timerCountdown,
+    });
+    // clear input
+    initialsInput.val("");
+    // send score to local storage, stringify for proper storage
+    localStorage.setItem(
+      "viewHighscore",
+      JSON.stringify(highscoreHistoryStorage)
+    );
+    // show history of stored scores
+    showScreen("highscoreHistory");
+    // call stored data from local storage
+    getHighscoreHistory();
+  }
+  // remove the final screen page
+});
 
 // programming onclick button functions to reveal/hide the corresponding article on page
 viewHighscores.on("click", function () {
-  highscoreHistory.addClass("active");
+  showScreen("highscoreHistory");
+  endTimer();
+  timerCountdown = 0;
 });
 
 goBack.on("click", function () {
-  highscoreHistory.removeClass("active");
+  showScreen("start");
 });
 
 // empty local storage array
