@@ -54,22 +54,62 @@ var questions = [
   },
 ];
 
+// things I need to target (with jQuery)
+
+// link to View Highscores
+let viewHighscores = $("#highscores");
+// Countdown value
+let timeRemaining = $("#time-remaining");
+// Start screen
+let start = $("#start");
+// Start button
+let startButton = $("#start-button");
+// question screen
+let question = $("#question");
+// rotate questions
+let questionTitle = $("#question-title");
+// next button
+let next = $("#next-question-button");
+// final screen
+let finalScreen = $("#end-quiz-screen");
+// your score for the quiz
+let yourScore = $("#yourScore");
+// initials for key/value highscore
+let initialsInput = $("#initialsInput");
+// submit score
+let submit = $("#submit-score-button");
+// highscores history section
+let highscoreHistory = $("#hHistory");
+// stored highscores
+let scoreList = $("#scores-list");
+// return/goback to start screen
+let goBack = $("#return");
+// clear saved (from local storage) scores
+let clearHighscore = $("#clear-scores");
+
 // variables setting
+
+var highscoreHistory = [];
+// time to be relative to the QUESTIONS - therefore increasing questions in future = more time
+var timerCountdown = questions.length * 20;
 
 // TODO: scoreboard, timer
 
-var score = 0;
-var timerLeft = 0;
-var timer;
+function setTimer() {
+  var timerInterval = setInterval(() => {
+    timeRemaining--;
+    timer.textContent("Time: " + timeRemaining);
+
+    if (timeRemaining <= 0) {
+      clearInterval(timerInterval);
+      // stopshowing questions display: none
+      // display yourScore
+      yourScore.textContent("Your score: " + secondsLeft);
+    }
+  }, interval);
+}
 
 // start the countdown timer
-
-function start() {
-  timerLeft = 90;
-  $("#timerLeft");
-
-  setInterval(() => {}, 1000);
-}
 
 // start button () => { launches quiz and begins timer ( 90s ) => }
 // HTML visually to change from "Welcome Screen" to "Question 1"
