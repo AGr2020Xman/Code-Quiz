@@ -65,7 +65,7 @@ let start = $("#start");
 // Start button
 let startButton = $("#start-button");
 // question screen
-let question = $("#question");
+let questionScreen = $("#question");
 // rotate questions
 let questionTitle = $("#question-title");
 // next button
@@ -94,7 +94,7 @@ var highscoreHistoryStorage = [];
 var timerCountdown = questions.length * 20;
 var interval;
 var currentQuestion = 0;
-
+var penalty = 5;
 // starting quiz section
 
 // start quiz function defined
@@ -103,57 +103,101 @@ var startQuiz = () => {
   // hide starting screen
   start.addClass("fade");
   // reveal questions
-  question.addClass("active");
-  // nextQuestion function to currentQuestion
-  displayQuestion(questions[0]);
-  // currentQuestion = nextQuestion(currentQuestion);
+  questionScreen.addClass("active");
+  // displayQuestion function to currentQuestion
+  displayQuestion();
+  // currentQuestion = displayQuestion(currentQuestion);
 };
 
 // start quiz >> display question
-// user picks answer >> nextQuestion
-// if no nextQuestion >> Display score & prompt for initials
+// user picks answer >> displayQuestion
+// if no displayQuestion >> Display score & prompt for initials
 // if initials.val() >> save score and display Highscore List
-var displayQuestion = (questionToDisplay) => {
-  // generic display question
-  questionTitle.text(questionToDisplay.title);
-  next.empty();
 
-  questionToDisplay.choices.forEach((item, index) => {
-    console.log(item);
+// var displayQuestion = (questionToDisplay) => {
+//   // generic display question
+//   questionTitle.text(questionToDisplay.title);
+//   next.empty();
 
-    var answer = $(
-      `<button class="answer">${index + 1}. ${item.displayText}</button>`
-    );
-    next.append(answer);
-  });
-};
-// nextQuestion function defined
-var nextQuestion = () => {
-  //
-  if (i <= questions.length - 1) {
-    questionTitle.text(questions[i].title);
-    next.empty();
+//   questionToDisplay.choices.forEach((item, index) => {
 
-    questions[i].choices.forEach((item, index) => {
-      var answer = $(
-        `<button class="answer">${index + 1}. ${item.displayText}</button>`
-      );
-      next.append(answer);
-    });
-  } else {
-    question.removeClass("active");
-    finalScreen.addClass("active");
-    clearInterval(interval);
-    if (timerCountdown < 0) {
-      timeRemaining.text(0);
-      yourScore.text(0);
+//     var answer = $(
+//       `<button id=${index} class="answer">${index + 1}. ${item.displayText}</button>`
+//     );
+//     next.append(answer);
+//   });
+
+// THIS MIGHT HELP CONNECT THE start AND displayQuestion functions
+var compare = (event) => {
+  var answerElement = event.target;
+  if (answerElement.matches("button")) {
+    // var createCorrect = document.createElement("div");
+    // createCorrect.setAttribute("id", "createCorrect");
+    // if (answerElement.textContent == questions[currentQuestion].answerId) {
+      timerCountdown += 5;
+      // createCorrect.textContent = "Correct!";
     } else {
-      yourScore.text(timerCountdown);
-      timeRemaining.text(timerCountdown);
+      timeRemaining = timeRemaining - penalty;
+      // createCorrect.textContent = "Incorrect!";
     }
   }
-  return currentQuestion;
+  currentQuestion++;
 };
+
+// displayQuestion function defined
+var displayQuestion = () => {
+
+  var question = questions[currentQuestion]
+  if (question){
+    populateQuestionHTML(question);
+  } else {
+    displayFinalScreen();
+  }
+};
+
+var populateQuestionHTML = (question) => {
+  
+  questionTitle.text(questions[currentQuestion].title);
+  next.empty();
+
+  questions[currentQuestion].choices.forEach((item, index) => {
+    var answer = $(`<button class="answer">${index + 1}. ${item.displayText}</button>`);
+    next.append(answer);
+  })
+};
+
+var displayFinalScreen = () => {
+  
+}
+
+
+  //
+//   debugger;
+
+//   if (currentQuestion <= questions.length - 1) {
+//     questionTitle.text(questions[currentQuestion].title);
+//     next.empty();
+
+//     questions[currentQuestion].choices.forEach((item, index) => {
+//       var answer = $(
+//         `<button class="answer">${index + 1}. ${item.displayText}</button>`
+//       );
+//       next.append(answer);
+//     });
+//     $('.answer').on('click',(compare));
+//   } else {
+//     questionScreen.removeClass("active");
+//     finalScreen.addClass("active");
+//     clearInterval(interval);
+//     if (timerCountdown < 0) {
+//       timeRemaining.text(0);
+//       yourScore.text(0);
+//     } else {
+//       yourScore.text(timerCountdown);
+//       timeRemaining.text(timerCountdown);
+//     }
+//   }
+// };
 
 // TO ADD SOUNDS [might get time/too hard] - NEEDS THIS with a conditional
 
