@@ -166,8 +166,24 @@ var populateQuestionHTML = (question) => {
     var answer = $(
       `<button class="answer">${index + 1}. ${item.displayText}</button>`
     );
+    answer.on("click", clickAnswer);
     next.append(answer);
   });
+};
+
+// Hello Carlin - this is a QUIZ application
+// It is giving me aids
+// I got too complicated and so we have now started subdividing my functions
+// Basic functionality is
+// USER presses start quiz (and a timer starts) > questions come up with answers
+// user selects answer > if correct YAY next question
+// >> if incorrect - BOO lose 5 seconds, next questions
+// after answering last question - Timer STOPS; time = yourScore
+// User prompted to save highscore
+// may view sorted scores list OR go back to start and try again
+
+var clickAnswer = (answer) => {
+  console.log(answer);
 };
 
 var displayFinalScreen = () => {
@@ -177,9 +193,13 @@ var displayFinalScreen = () => {
 var resolvePreviousAnswer = (wasThatCorrect) => {
   // HTML to display CORRECT or INCORRECT
   if (wasThatCorrect) {
-    // display CORRECT in DOMS
+    correctFlash = $('<div class="flash">Correct!</div>');
+    questionScreen.append(correctFlash);
   } else {
     // display INCORRECT in DOMS + apply penalty?
+    incorrectFlash = $('<div class="flash">Incorrect!</div>');
+    questionScreen.append(incorrectFlash);
+    timerCountdown -= 5;
   }
 };
 
