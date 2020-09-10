@@ -282,6 +282,7 @@ viewHighscores.on("click", function () {
 
 goBack.on("click", function () {
   showScreen("start");
+  timeRemaining.text(timerCountdown);
 });
 
 // empty local storage array
