@@ -95,6 +95,8 @@ var timerCountdown = questions.length * 20;
 var currentQuestion = 0;
 var interval;
 
+// HighScore History section
+
 // set local storage array
 localStorage.setItem("viewHighscores", JSON.stringify([]));
 
@@ -122,6 +124,48 @@ getHighscoreHistory = () => {
 };
 
 getHighscoreHistory();
+
+// programming onclick button functions to reveal/hide the corresponding article on page
+viewHighscores.on('click', function () {
+  highscoreHistory.addClass('active');
+});
+
+goBack.on('click', function() {
+  highscoreHistory.removeClass('active');
+});
+
+// empty local storage array
+clearHighscore.on('click', function() {
+  localStorage.setItem('viewHighscores', JSON.stringify([]));
+});
+
+// End HighScore History section
+
+// starting quiz section
+
+startQuiz(() => {
+  // hide starting screen
+  start.addClass('fade');
+  // reveal questions
+  question.addClass('active');
+  // nextQuestion function to currentQuestion
+  nextQuestion(currentQuestion);
+});
+
+
+
+nextQuestion(() => {
+  if (number <= questions.length-1){
+    questionTitle.text(questions[number].title);
+    next.empty();
+
+    questions[number].choices.forEach((item,index) => {
+      var answer = $(`<button class="answer">${index + 1}. ${item}</button>`);
+      next.append(answer);
+    });
+  
+
+
 
 // TODO: scoreboard, timer
 
