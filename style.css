@@ -1,5 +1,3 @@
-#highScore {}
-
-#countdown {}
-
-#timer {}
+.start.fade {
+    display: none;
+}

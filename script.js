@@ -2,10 +2,10 @@ var questions = [
   {
     title: "Commonly used data types DO NOT inlude:",
     choices: [
-      { id: 1, diplayText: "alerts" },
-      { id: 2, diplayText: "booleans" },
-      { id: 3, diplayText: "numbers" },
-      { id: 4, diplayText: "strings" },
+      { id: 1, displayText: "alerts" },
+      { id: 2, displayText: "booleans" },
+      { id: 3, displayText: "numbers" },
+      { id: 4, displayText: "strings" },
     ],
     answerId: 1,
   },
@@ -13,20 +13,20 @@ var questions = [
     title:
       "The condition in an if/else statement is enclosed within __________",
     choices: [
-      { id: 1, diplayText: "curly braces" },
-      { id: 2, diplayText: "parentheses" },
-      { id: 3, diplayText: "quotes" },
-      { id: 4, diplayText: "square brackets" },
+      { id: 1, displayText: "curly braces" },
+      { id: 2, displayText: "parentheses" },
+      { id: 3, displayText: "quotes" },
+      { id: 4, displayText: "square brackets" },
     ],
     answerId: 2,
   },
   {
     title: "Arrays in JavaScript can be used to store __________",
     choices: [
-      { id: 1, diplayText: "booleans" },
-      { id: 2, diplayText: "numbers and strings" },
-      { id: 3, diplayText: "other arrays" },
-      { id: 4, diplayText: "all of the above" },
+      { id: 1, displayText: "booleans" },
+      { id: 2, displayText: "numbers and strings" },
+      { id: 3, displayText: "other arrays" },
+      { id: 4, displayText: "all of the above" },
     ],
     answerId: 4,
   },
@@ -34,10 +34,10 @@ var questions = [
     title:
       "String values must be enclosed within __________ when being assigned to variables.",
     choices: [
-      { id: 1, diplayText: "commas" },
-      { id: 2, diplayText: "curly braces" },
-      { id: 3, diplayText: "quotes" },
-      { id: 4, diplayText: "parentheses" },
+      { id: 1, displayText: "commas" },
+      { id: 2, displayText: "curly braces" },
+      { id: 3, displayText: "quotes" },
+      { id: 4, displayText: "parentheses" },
     ],
     answerId: 3,
   },
@@ -45,10 +45,10 @@ var questions = [
     title:
       "A very useful tool used during development and debugging for printing content to the degugger is:",
     choices: [
-      { id: 1, diplayText: "JavaScript" },
-      { id: 2, diplayText: "terminal/bash" },
-      { id: 3, diplayText: "for loops" },
-      { id: 4, diplayText: "console.log" },
+      { id: 1, displayText: "JavaScript" },
+      { id: 2, displayText: "terminal/bash" },
+      { id: 3, displayText: "for loops" },
+      { id: 4, displayText: "console.log" },
     ],
     answerId: 4,
   },
@@ -93,44 +93,51 @@ var highscoreHistoryStorage = [];
 // time to be relative to the QUESTIONS - therefore increasing questions in future = more time
 var timerCountdown = questions.length * 20;
 var interval;
-
+var currentQuestion = 0;
 
 // starting quiz section
-  
-  
-  
-  // start quiz function defined
-  var startQuiz = () => {
-    // hide starting screen
-    start.addClass("fade");
+
+// start quiz function defined
+
+var startQuiz = () => {
+  // hide starting screen
+  start.addClass("fade");
   // reveal questions
   question.addClass("active");
   // nextQuestion function to currentQuestion
-  nextQuestion(currentQuestion);
+  displayQuestion(questions[0]);
+  // currentQuestion = nextQuestion(currentQuestion);
 };
 
+// start quiz >> display question
+// user picks answer >> nextQuestion
+// if no nextQuestion >> Display score & prompt for initials
+// if initials.val() >> save score and display Highscore List
+var displayQuestion = (questionToDisplay) => {
+  // generic display question
+  questionTitle.text(questionToDisplay.title);
+  next.empty();
 
-  
-var currentQuestion;
-for (i )
+  questionToDisplay.choices.forEach((item, index) => {
+    console.log(item);
 
-
-// how to access an Object
-// accessible directly in HTML
-questionTitle = questions[i].title
-// created entried in HTML
-answer 
-
-
+    var answer = $(
+      `<button class="answer">${index + 1}. ${item.displayText}</button>`
+    );
+    next.append(answer);
+  });
+};
 // nextQuestion function defined
 var nextQuestion = () => {
-  // 
-  if (number <= questions.length - 1) {
-    questionTitle.text(questions[number].title);
+  //
+  if (i <= questions.length - 1) {
+    questionTitle.text(questions[i].title);
     next.empty();
-    
-    questions[number].choices.forEach((item, index) => {
-      var answer = $(`<button class="answer">${index + 1}. ${item}</button>`);
+
+    questions[i].choices.forEach((item, index) => {
+      var answer = $(
+        `<button class="answer">${index + 1}. ${item.displayText}</button>`
+      );
       next.append(answer);
     });
   } else {
@@ -145,25 +152,23 @@ var nextQuestion = () => {
       timeRemaining.text(timerCountdown);
     }
   }
+  return currentQuestion;
 };
 
-// TO ADD SOUNDS [might get time/too hard] - NEEDS THIS with a conditional 
+// TO ADD SOUNDS [might get time/too hard] - NEEDS THIS with a conditional
 
 // // $(document).on('click','.answer', function() {
 //   if (this.innerText.slice(3,this.innerText.length) === questions[currentQuestion].answer)
 // })
 
-
-
-
 // user presses start quiz button
-startButton.on('click', function() {
+startButton.on("click", function () {
   // startquiz function hides start screen and shows questions module
   startQuiz();
   interval = setInterval(() => {
-    if (timerCountdown <=0) {
+    if (timerCountdown <= 0) {
       timerCountdown = 0;
-      return
+      return;
     }
     timerCountdown--;
     timeRemaining.text(timerCountdown);
@@ -172,37 +177,40 @@ startButton.on('click', function() {
 
 // submitting scores
 
-submit.on('click', function() {
+submit.on("click", function () {
   // if score has gone negative intger due to incorrect answers, reset to 0, minimum score
   if (timerCountdown < 0) {
     timerCountdown = 0;
   }
   // if initials are recorded (even if blank)
-  if (initialsInput.val()){
+  if (initialsInput.val()) {
     // push to storage array as an object recording name: and Highscore: time
-    highscoreHistoryStorage.push({name: initialsInput.val(), viewHighscores: timerCountdown});
+    highscoreHistoryStorage.push({
+      name: initialsInput.val(),
+      viewHighscores: timerCountdown,
+    });
     // clear input
-    initialsInput.val('');
+    initialsInput.val("");
     // send score to local storage, stringify for proper storage
-    localStorage.setItem('viewHighscore', JSON.stringify(highscoreHistoryStorage))
+    localStorage.setItem(
+      "viewHighscore",
+      JSON.stringify(highscoreHistoryStorage)
+    );
     // show history of stored scores
-    highscoreHistory.addClass('active');
+    highscoreHistory.addClass("active");
     // call stored data from local storage
     getHighscoreHistory();
   }
   // remove the final screen page
-  finalScreen.removeClass('active');
+  finalScreen.removeClass("active");
   // allow the start screen to return
-  start.removeClass('fade');
-  currentQuestion = 0 //DEPENDENT ON HOW LOOPING WORKS FOR ACCESSING INDEXED OBJECTS //
+  start.removeClass("fade");
+  currentQuestion = 0; //DEPENDENT ON HOW LOOPING WORKS FOR ACCESSING INDEXED OBJECTS //
   timerCountdown = questions.length * 20;
   timeRemaining.text(0);
 });
 
-
 // ending quiz section
-
-
 
 // HighScore History section
 
@@ -216,36 +224,38 @@ var getHighscoreHistory = () => {
   if (localStorage.getItem("viewHighscores")) {
     highscoreHistoryStorage = JSON.parse(
       localStorage.getItem("viewHighscores")
-      );
-      // compare function parameter in .sort() function to organise score values
-      highscoreHistoryStorage.sort((a, b) => {
-        b.viewHighscores - a.viewHighscores;
-      });
-    }
-    // for EACH item and index, create entry under scoreList with target-able classes
+    );
+    // compare function parameter in .sort() function to organise score values
+    highscoreHistoryStorage.sort((a, b) => {
+      b.viewHighscores - a.viewHighscores;
+    });
+  }
+  // for EACH item and index, create entry under scoreList with target-able classes
   highscoreHistoryStorage.forEach((item, index) => {
     var itemValue = $(
-      `<div class="highscoreItem">${index + 1}. ${item.name} <span class="savedScore">${item.viewHighscores}</span></div>`
-      );
-      // append to scoreList in the scores section, under the highscoreHistory article
-      $("scoreList").append(itemValue);
-    });
-  };
-  
-  getHighscoreHistory();
-  
-  // programming onclick button functions to reveal/hide the corresponding article on page
-  viewHighscores.on("click", function () {
-    highscoreHistory.addClass("active");
+      `<div class="highscoreItem">${index + 1}. ${
+        item.name
+      } <span class="savedScore">${item.viewHighscores}</span></div>`
+    );
+    // append to scoreList in the scores section, under the highscoreHistory article
+    $("scoreList").append(itemValue);
   });
-  
-  goBack.on("click", function () {
-    highscoreHistory.removeClass("active");
-  });
-  
-  // empty local storage array
-  clearHighscore.on("click", function () {
-    localStorage.setItem("viewHighscores", JSON.stringify([]));
-  });
-  
-  // End HighScore History section
+};
+
+getHighscoreHistory();
+
+// programming onclick button functions to reveal/hide the corresponding article on page
+viewHighscores.on("click", function () {
+  highscoreHistory.addClass("active");
+});
+
+goBack.on("click", function () {
+  highscoreHistory.removeClass("active");
+});
+
+// empty local storage array
+clearHighscore.on("click", function () {
+  localStorage.setItem("viewHighscores", JSON.stringify([]));
+});
+
+// End HighScore History section
