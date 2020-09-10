@@ -153,7 +153,7 @@ var populateQuestionHTML = (question) => {
     // WHEN answer btn is clicked
     answer.on("click", function () {
       // THEN check if the answer user selected is CORRECT or not
-      isCorrectAnswer = question.answerId !== item.id;
+      isCorrectAnswer = question.answerId === item.id;
       if (isCorrectAnswer) {
         correctFlash = $('<div class="flash">Correct!</div>');
         questionScreen.append(correctFlash);
@@ -175,19 +175,6 @@ var populateQuestionHTML = (question) => {
 var displayFinalScreen = () => {
   endTimer();
   showScreen("finalScreen");
-};
-
-var resolvePreviousAnswer = (wasThatCorrect) => {
-  // HTML to display CORRECT or INCORRECT
-  if (question.answerId === item.id) {
-    $("#");
-    correctFlash = $('<div class="flash">Correct!</div>');
-    questionScreen.append(correctFlash);
-  } else {
-    // display INCORRECT in DOMS + apply penalty?
-    incorrectFlash = $('<div class="flash">Incorrect!</div>');
-    questionScreen.append(incorrectFlash);
-  }
 };
 
 var startTimer = () => {
