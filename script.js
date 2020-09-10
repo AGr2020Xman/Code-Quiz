@@ -1,41 +1,54 @@
 var questions = [
   {
-    title: "Dummy text",
+    title: "Commonly used data types DO NOT inlude:",
     choices: [
-      { id: 1, diplayText: "1" },
-      { id: 2, diplayText: "2" },
-      { id: 3, diplayText: "3" },
-      { id: 4, diplayText: "4" },
+      { id: 1, diplayText: "alerts" },
+      { id: 2, diplayText: "booleans" },
+      { id: 3, diplayText: "numbers" },
+      { id: 4, diplayText: "strings" },
     ],
     answerId: 1,
   },
   {
-    title: "Dummy text",
+    title:
+      "The condition in an if/else statement is enclosed within __________",
     choices: [
-      { id: 1, diplayText: "1" },
-      { id: 2, diplayText: "2" },
-      { id: 3, diplayText: "3" },
-      { id: 4, diplayText: "4" },
+      { id: 1, diplayText: "curly braces" },
+      { id: 2, diplayText: "parentheses" },
+      { id: 3, diplayText: "quotes" },
+      { id: 4, diplayText: "square brackets" },
     ],
     answerId: 2,
   },
   {
-    title: "Dummy text",
+    title: "Arrays in JavaScript can be used to store __________",
     choices: [
-      { id: 1, diplayText: "1" },
-      { id: 2, diplayText: "2" },
-      { id: 3, diplayText: "3" },
-      { id: 4, diplayText: "4" },
+      { id: 1, diplayText: "booleans" },
+      { id: 2, diplayText: "numbers and strings" },
+      { id: 3, diplayText: "other arrays" },
+      { id: 4, diplayText: "all of the above" },
+    ],
+    answerId: 4,
+  },
+  {
+    title:
+      "String values must be enclosed within __________ when being assigned to variables.",
+    choices: [
+      { id: 1, diplayText: "commas" },
+      { id: 2, diplayText: "curly braces" },
+      { id: 3, diplayText: "quotes" },
+      { id: 4, diplayText: "parentheses" },
     ],
     answerId: 3,
   },
   {
-    title: "Dummy text",
+    title:
+      "A very useful tool used during development and debugging for printing content to the degugger is:",
     choices: [
-      { id: 1, diplayText: "1" },
-      { id: 2, diplayText: "2" },
-      { id: 3, diplayText: "3" },
-      { id: 4, diplayText: "4" },
+      { id: 1, diplayText: "JavaScript" },
+      { id: 2, diplayText: "terminal/bash" },
+      { id: 3, diplayText: "for loops" },
+      { id: 4, diplayText: "console.log" },
     ],
     answerId: 4,
   },
