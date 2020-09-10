@@ -92,7 +92,7 @@ let clearHighscore = $("#clear-scores");
 var highscoreHistoryStorage = [];
 
 // time to be relative to the QUESTIONS - therefore increasing questions in future = more time
-var timerCountdown = questions.length * 20;
+var timerCountdown = questions.length * 15;
 
 var interval;
 var currentQuestion = 0;
@@ -125,11 +125,12 @@ var startQuiz = () => {
   // hide starting screen
   // reveal questions
   showScreen("questionScreen");
+  currentQuestion = 0;
+  timerCountdown = questions.length * 15;
   // start timer
   startTimer();
   // displayQuestion function to currentQuestion
   displayQuestion();
-  // currentQuestion = displayQuestion(currentQuestion);
 };
 
 // displayQuestion function defined
@@ -194,6 +195,7 @@ var displayFinalScreen = () => {
 };
 
 var startTimer = () => {
+  timeRemaining.text(timerCountdown);
   interval = setInterval(() => {
     if (timerCountdown <= 0) {
       timerCountdown = 0;
@@ -212,17 +214,16 @@ var endTimer = () => {
 var getHighscoreHistory = () => {
   // clear highscore board
   scoreList.empty();
-  debugger;
   if (localStorage.getItem("viewHighscores")) {
     highscoreHistoryStorage = JSON.parse(
       localStorage.getItem("viewHighscores")
     );
     // compare function parameter in .sort() function to organise score values
     highscoreHistoryStorage.sort((a, b) => {
-      b.viewHighscores - a.viewHighscores;
+      return b.viewHighscores - a.viewHighscores;
     });
   }
-  debugger;
+
   // for EACH item and index, create entry under scoreList with target-able classes
   highscoreHistoryStorage.forEach((item, index) => {
     var itemValue = $(
@@ -286,7 +287,7 @@ goBack.on("click", function () {
 // empty local storage array
 clearHighscore.on("click", function () {
   localStorage.setItem("viewHighscores", JSON.stringify([]));
-  getHighscoreHistory;
+  getHighscoreHistory();
 });
 
 // End HighScore History section
