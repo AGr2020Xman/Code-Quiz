@@ -91,7 +91,8 @@ let clearHighscore = $("#clear-scores");
 var highscoreHistoryStorage = [];
 
 // time to be relative to the QUESTIONS - therefore increasing questions in future = more time
-var timerCountdown = questions.length * 15;
+var defaultTime = questions.length * 15;
+var timerCountdown = defaultTime;
 
 var interval;
 var currentQuestion = 0;
@@ -136,7 +137,7 @@ var startQuiz = () => {
 // variable quiz defaults
 var resetDefault = () => {
   currentQuestion = 0;
-  timerCountdown = questions.length * 15;
+  timerCountdown = defaultTime;
 };
 
 // displayQuestion function defined
