@@ -49,6 +49,7 @@ _Final submission page for your score_
 ![](Assets/finalsubmission.JPG)
 
 _Highscores board_
+
 ![](Assets/highscores.JPG)
 
 #### Deployed application
