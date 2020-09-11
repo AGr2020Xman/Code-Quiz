@@ -40,16 +40,16 @@ Clear single-responsibility is assigned to most functions, with room to add more
 #### Same of deployed application
 
 _Starting page_
-![](./Assets/startpage.jpg)
+![](Assets/startpage.jpg)
 
 _Quiz questions created on start_
-![](./Assets/quizquestions.jpg)
+![](Assets/quizquestions.jpg)
 
 _Final submission page for your score_
-![](./Assets/finalsubmission.jpg)
+![](Assets/finalsubmission.jpg)
 
 _Highscores board_
-![](./Assets/highscores.jpg)
+![](Assets/highscores.jpg)
 
 #### Deployed application
 
