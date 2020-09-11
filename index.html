@@ -23,45 +23,45 @@
       <button class="highscore navbar-brand bg-dark" id="highscores">
         View Highscores
       </button>
-      <section class="timer navbar-brand d-lg-inline-block">
+      <section class="timer navbar-brand ">
         Time: <span id="time-remaining">0</span>
       </section>
     </nav>
 
-    <main class="quiz-container flex-shrink-0 container">
-      <div class="row">
-
-        <section class="start-quiz col-md-6" id="start">
-          <h1 class="greeting">Welcome to the Coding Quiz</h1>
-          <p class="info-text">
+    <main class="quiz-container flex-shrink-0 container justify-content-center" id="start">
+      <div class="quiz-central col-lg-8 p-4">
+        <section class="start-quiz" >
+          <h1 class="greeting ">Welcome to the Coding Quiz</h1>
+          <hr>
+          <p class="info-text justify-content-center col-md-12">
             Try to answer the following code-related question with in the time
             limit. Incorrect answers will be penalized by a loss of 15 seconds, 
             and a correct answer will be rewarded with an additional 5. 
           </p>
-          <button class="btn-primary text-center" id="start-button">Start Quiz</button>
+          <button class="btn-primary text-center col-md-12 mt-4" id="start-button">Start Quiz</button>
         </section>
       </div>
     </main>
 
-    <article class="questions flex-shrink-0 container" id="question">
-      <div class="row">
+    <article class="questions flex-shrink-0 container justify-content-center" id="question">
+      <div class="quiz-central col-lg-8 p-4">
         <div class="question-container"></div>
-        <section class="titles" id="question-title"></section>
-        <section class="next-question" id="next-question-button"></section>
+        <section class="titles col-lg-11" id="question-title"></section>
+        <section class="next-question col-md-7" id="next-question-button"></section>
       </div>
-      <div class="flash alert alert-primary" role="alert" id="correct">
+      <div class="flash alert alert-primary col-lg-8 p-4" role="alert" id="correct">
         Correct!
       </div>
-      <div class="flash alert alert-danger" role="alert" id="incorrect">
+      <div class="flash alert alert-danger col-lg-8 p-4" role="alert" id="incorrect">
         Incorrect!
       </div>
       </div>
     </article>
 
-    <article class="end-quiz flex-shrink-0 container" id="end-quiz-screen">
-      <div class="row">
-
-        <div class="titles ">All done! Compare your score by submitting it!</div>
+    <article class="end-quiz flex-shrink-0 container justify-content-center" id="end-quiz-screen">
+      <div class="quiz-central col-lg-8 p-4">
+        <div class="titles justify-content-center">All done! Compare your score by submitting it!</div>
+        <hr>
         <p class="your-final-score">Your final score is: <span id="yourScore"></span></p>
         <div class="input-box">
           Enter your initials: 
@@ -75,12 +75,12 @@
   </div>
     </article>
 
-    <article class="highscore-history flex-shrink-0 container" id="hHistory">
-      <div class="row">
-
+    <article class="highscore-history flex-shrink-0 container justify-content-center" id="hHistory">
+      <div class="quiz-central col-lg-8 p-4">
         <div class="highscore-history-container">
           <section class="scores">
-            <div class="titles">Highscores</div>
+            <div class="titles justify-content-center ">Highscores</div>
+            <hr>
             <div class="score-list" id="scores-list"></div>
           </section>
           <section class="navigation-buttons">

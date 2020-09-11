@@ -157,7 +157,7 @@ var populateQuestionHTML = (question) => {
 
   question.choices.forEach((item, index) => {
     var answer = $(
-      `<button class="answer btn-info btn-block text-left">${index + 1}. ${
+      `<button class="answer btn-secondary btn-block text-left">${index + 1}. ${
         item.displayText
       }</button>`
     );
@@ -188,10 +188,10 @@ var showFeedback = (isCorrectAnswer) => {
 
   // flash result of previous answer
   if (isCorrectAnswer) {
-    correctFeedback.show().fadeOut(1000);
+    correctFeedback.show().fadeOut(500);
     incorrectFeedback.hide();
   } else {
-    incorrectFeedback.show().fadeOut(1000);
+    incorrectFeedback.show().fadeOut(500);
     correctFeedback.hide();
   }
 };
@@ -247,7 +247,7 @@ var getHighscoreHistory = () => {
     var itemValue = $(
       `<div class="highscoreItem">${index + 1}. ${
         item.name
-      } <span class="savedScore">${item.viewHighscores}</span></div>`
+      } <span class="savedScore">: ${item.viewHighscores}</span></div><hr>`
     );
     // append to scoreList in the scores section, under the highscoreHistory article
     scoreList.append(itemValue);

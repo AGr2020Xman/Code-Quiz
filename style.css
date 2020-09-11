@@ -12,24 +12,60 @@
     margin-bottom: 10px;
 }
 
-.your-final-score {}
+.highscoreItem {
+    color: black;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+#return {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#clear-score {}
+
+.savedScore {
+    color: ;
+    font-weight: bolder;
+    font-family: 'Noto Serif', serif;
+    font-size: 18px;
+}
+
+.your-final-score {
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Noto Serif', serif;
+}
+
+.quiz-central {
+    background-color: #f1faee;
+    border: black;
+}
 
 #time-remaining {
     font-weight: bold;
 }
 
-.timer {}
+.input-box {
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+}
 
 p {
     font-family: 'Raleway', sans-serif;
     text-align: justify;
     margin-top: 15px;
+    line-height: 150%;
 }
 
 .titles {
     font-size: 30px;
     font-family: 'Noto Serif', serif;
     margin-bottom: 20px;
+    color: #50cbd0;
 }
 
 title {
@@ -47,7 +83,6 @@ body {
 
 .highscore-history {
     margin-top: 20px;
-    display: ;
 }
 
 .questions {
@@ -68,6 +103,7 @@ body {
 .greeting {
     text-align: center;
     font-family: 'Noto Serif', serif;
+    color: #50cbd0;
 }
 
 #start-button {
