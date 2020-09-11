@@ -30,6 +30,10 @@ WHEN the game is over
 THEN I can save my initials and score
 ```
 
+#### Deployed application
+
+Link: https://agr2020xman.github.io/Code-Quiz/
+
 ### Code
 
 The HTML is created and removed dynamically through JavaScript. DOM targeting and other skills were important in this task. jQuery was utilised to simplify some of this targeting.
@@ -51,10 +55,6 @@ _Final submission page for your score_
 _Highscores board_
 
 ![](Assets/highscores.JPG)
-
-#### Deployed application
-
-Link: https://agr2020xman.github.io/Code-Quiz/
 
 ### Authors
 
