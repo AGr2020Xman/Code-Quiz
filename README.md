@@ -59,7 +59,7 @@ _Highscores board_
 ### Authors
 
 - Original code by bootstrap used as framework
-- Code by \_Andr&eacute; Grech - 27/8/2020
+- Code by \_Andr&eacute; Grech - 11/9/2020
 - CSS is a mixture of custom styles and Bootstrap presets to assist in responsiveness
 
 ---
