@@ -188,10 +188,10 @@ var showFeedback = (isCorrectAnswer) => {
 
   // flash result of previous answer
   if (isCorrectAnswer) {
-    correctFeedback.show().fadeOut(500);
+    correctFeedback.show().fadeOut(1000);
     incorrectFeedback.hide();
   } else {
-    incorrectFeedback.show().fadeOut(500);
+    incorrectFeedback.show().fadeOut(1000);
     correctFeedback.hide();
   }
 };
