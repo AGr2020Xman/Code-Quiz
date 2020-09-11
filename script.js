@@ -242,17 +242,20 @@ var getHighscoreHistory = () => {
       return b.viewHighscores - a.viewHighscores;
     });
   }
-
-  // for EACH item and index, create entry under scoreList with target-able classes
-  highscoreHistoryStorage.forEach((item, index) => {
-    var itemValue = $(
-      `<div class="highscoreItem">${index + 1}. ${
-        item.name
-      } <span class="savedScore">: ${item.viewHighscores}</span></div><hr>`
-    );
-    // append to scoreList in the scores section, under the highscoreHistory article
-    scoreList.append(itemValue);
-  });
+  if (highscoreHistoryStorage.length === 0) {
+    scoreList.append(`<p class="sad">No highscores saved 😢</p>`); //add text saying no highscores saved to DOM
+  } else {
+    // for EACH item and index, create entry under scoreList with target-able classes
+    highscoreHistoryStorage.forEach((item, index) => {
+      var itemValue = $(
+        `<div class="highscoreItem">${index + 1}. ${
+          item.name
+        } <span class="savedScore">: ${item.viewHighscores}</span></div><hr>`
+      );
+      // append to scoreList in the scores section, under the highscoreHistory article
+      scoreList.append(itemValue);
+    });
+  }
 };
 
 // opening functions - show the start screen - get the current highscore history
