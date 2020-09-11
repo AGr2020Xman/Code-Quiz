@@ -37,7 +37,7 @@ The quiz is also modular - such that in it's current state, you may add infinite
 
 Clear single-responsibility is assigned to most functions, with room to add more. The page is also responsive thanks to some help from Bootstrap.
 
-#### Same of deployed application
+#### Sample of deployed application
 
 _Starting page_
 ![](Assets/startpage.jpg)
