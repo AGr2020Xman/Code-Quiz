@@ -12,27 +12,40 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700&family=Raleway&display=swap" rel="stylesheet">
+    <!-- external Colourpalette -->
+    <script data-id="08901008364158189">(["e63946","f1faee","a8dadc","457b9d","1d3557"]); </script>
   </head>
 
   <body>
-    <nav>
-      <button class="highscore" id="highscores">View Highscores</button>
-      <section class="timer">Time: <span id="time-remaining">0</span></section>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-area">
+      <button class="highscore navbar-brand bg-dark" id="highscores">
+        View Highscores
+      </button>
+      <section class="timer navbar-brand d-lg-inline-block">
+        Time: <span id="time-remaining">0</span>
+      </section>
     </nav>
 
-    <main class="quiz-container">
-      <section class="start-quiz" id="start">
-        <h1>Welcome to the Coding Quiz</h1>
-        <p>
-          Try to answer the following code-related question with in the time
-          limit. Incorrect answers will be penalized by a loss of 10 seconds
-        </p>
-        <button id="start-button">Start Quiz</button>
-      </section>
+    <main class="quiz-container flex-shrink-0 container">
+      <div class="row">
+
+        <section class="start-quiz col-md-6" id="start">
+          <h1 class="greeting">Welcome to the Coding Quiz</h1>
+          <p class="info-text">
+            Try to answer the following code-related question with in the time
+            limit. Incorrect answers will be penalized by a loss of 15 seconds, 
+            and a correct answer will be rewarded with an additional 5. 
+          </p>
+          <button class="btn-primary text-center" id="start-button">Start Quiz</button>
+        </section>
+      </div>
     </main>
 
-    <article class="questions" id="question">
-      <div class="question-container">
+    <article class="questions flex-shrink-0 container" id="question">
+      <div class="row">
+        <div class="question-container"></div>
         <section class="titles" id="question-title"></section>
         <section class="next-question" id="next-question-button"></section>
       </div>
@@ -42,30 +55,39 @@
       <div class="flash alert alert-danger" role="alert" id="incorrect">
         Incorrect!
       </div>
-    </article>
-
-    <article class="end-quiz" id="end-quiz-screen">
-      <div class="titles">All done!</div>
-      <p>Your final score is: <span id="yourScore"></span></p>
-      <div class="input-box">
-        Enter your initials: <input type="text" id="initialsInput" /><button
-          id="submit-score-button"
-        >
-          Submit
-        </button>
       </div>
     </article>
 
-    <article class="highscore-history" id="hHistory">
-      <div class="highscore-history-container">
-        <section class="scores">
-          <div class="titles">Highscores</div>
-          <div class="score-list" id="scores-list"></div>
-        </section>
-        <section class="navigation-buttons">
-          <button id="return">Go back to start</button>
-          <button id="clear-scores">Clear Highscores</button>
-        </section>
+    <article class="end-quiz flex-shrink-0 container" id="end-quiz-screen">
+      <div class="row">
+
+        <div class="titles ">All done! Compare your score by submitting it!</div>
+        <p class="your-final-score">Your final score is: <span id="yourScore"></span></p>
+        <div class="input-box">
+          Enter your initials: 
+          <input type="text" id="initialsInput" />
+          <button 
+          class="btn-success text-center"
+          id="submit-score-button">Submit
+        </button>
+      </div>
+    </div>
+  </div>
+    </article>
+
+    <article class="highscore-history flex-shrink-0 container" id="hHistory">
+      <div class="row">
+
+        <div class="highscore-history-container">
+          <section class="scores">
+            <div class="titles">Highscores</div>
+            <div class="score-list" id="scores-list"></div>
+          </section>
+          <section class="navigation-buttons">
+            <button class="btn-primary btn-block text-center" id="return">Go back to start</button>
+            <button class="btn-warning btn-block text-center" id="clear-scores">Clear Highscores</button>
+          </section>
+        </div>
       </div>
     </article>
 

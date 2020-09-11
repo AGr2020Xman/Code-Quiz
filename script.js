@@ -1,6 +1,6 @@
 var questions = [
   {
-    title: "Commonly used data types DO NOT inlude:",
+    title: "Commonly used data types DO NOT include:",
     choices: [
       { id: 1, displayText: "alerts" },
       { id: 2, displayText: "booleans" },
@@ -157,7 +157,9 @@ var populateQuestionHTML = (question) => {
 
   question.choices.forEach((item, index) => {
     var answer = $(
-      `<button class="answer">${index + 1}. ${item.displayText}</button>`
+      `<button class="answer btn-info btn-block text-left">${index + 1}. ${
+        item.displayText
+      }</button>`
     );
     // WHEN answer btn is clicked
     answer.on("click", function () {
@@ -165,6 +167,7 @@ var populateQuestionHTML = (question) => {
       isCorrectAnswer = question.answerId === item.id;
       if (isCorrectAnswer) {
         showFeedback(isCorrectAnswer);
+        timerCountdown += 5;
       } else {
         // IF answer is incorrect - penalise time (10s)
         showFeedback(isCorrectAnswer);
@@ -210,6 +213,7 @@ var startTimer = () => {
   interval = setInterval(() => {
     if (timerCountdown <= 0) {
       timerCountdown = 0;
+      displayFinalScreen();
       return;
     }
     timerCountdown--;

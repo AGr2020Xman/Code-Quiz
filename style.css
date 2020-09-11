@@ -3,20 +3,81 @@
     text-align: center;
 }
 
-/* .start.fade {
-                display: none;
-            }
-            
-            .questions.fade {
-                display: none;
-            }
-            
-            .highscore-history {
-                display: none;
-            }
-            
-            .highscore-history.active {
-                
-            }
-            
-            */
+.answer {
+    display: block;
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.your-final-score {}
+
+#time-remaining {
+    font-weight: bold;
+}
+
+.timer {}
+
+p {
+    font-family: 'Raleway', sans-serif;
+    text-align: justify;
+    margin-top: 15px;
+}
+
+.titles {
+    font-size: 30px;
+    font-family: 'Noto Serif', serif;
+    margin-bottom: 20px;
+}
+
+title {
+    font-family: 'Noto Serif', serif;
+}
+
+body {
+    background-image: url("./Assets/moroccan-flower.png");
+}
+
+.highscore {
+    border-radius: 15px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.highscore-history {
+    margin-top: 20px;
+    display: ;
+}
+
+.questions {
+    margin-top: 20px;
+    font-family: 'Raleway', sans-serif;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.quiz-container {
+    margin-top: 20px;
+}
+
+.end-quiz {
+    margin-top: 20px;
+}
+
+.greeting {
+    text-align: center;
+    font-family: 'Noto Serif', serif;
+}
+
+#start-button {
+    border-radius: 15px;
+}
+
+#return {
+    border-radius: 15px;
+}
+
+#clear-scores {
+    border-radius: 15px;
+}
