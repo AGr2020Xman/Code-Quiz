@@ -1,6 +1,10 @@
-# 04 Web APIs: Code Quiz
+# Code Quiz
 
-As you proceed in your career as a web developer, you will probably be asked to complete a coding assessment, which is typically a combination of multiple-choice questions and interactive challenges. Build a timed code quiz with multiple-choice questions. This app will run in the browser and feature dynamically updated HTML and CSS powered by your JavaScript code. It will also feature a clean and polished user interface and be responsive, ensuring that it adapts to multiple screen sizes.
+As I proceed further in into my career as a web developer, I will probably be asked to complete a coding assessment. This project addresses this with a combination of multiple-choice questions and interactive challenges. I've built a timed code quiz with multiple-choice questions. This app will run in the browser and feature dynamically updated HTML and CSS powered by your JavaScript code. It will also feature a clean and polished user interface and be responsive, ensuring that it adapts to multiple screen sizes.
+
+## Contents
+
+- index.html, script.js, style.css, Assets (images and originally provided demo)
 
 ## User Story
 
@@ -26,17 +30,37 @@ WHEN the game is over
 THEN I can save my initials and score
 ```
 
-The following animation demonstrates the application functionality:
+### Code
 
-![code quiz](./Assets/04-web-apis-homework-demo.gif)
+The HTML is created and removed dynamically through JavaScript. DOM targeting and other skills were important in this task. jQuery was utilised to simplify some of this targeting.
+The quiz is also modular - such that in it's current state, you may add infinite questions to the quiz, and adjust the extra time per question from 15s.
 
-### Review
+Clear single-responsibility is assigned to most functions, with room to add more. The page is also responsive thanks to some help from Bootstrap.
 
-You are required to submit the following for review:
+#### Same of deployed application
 
-* The URL of the functional, deployed application.
+_Starting page_
+![](./Assets/startpage.jpg)
 
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
+_Quiz questions created on start_
+![](./Assets/quizquestions.jpg)
 
-- - -
+_Final submission page for your score_
+![](./Assets/finalsubmission.jpg)
+
+_Highscores board_
+![](./Assets/highscores.jpg)
+
+#### Deployed application
+
+Link: https://agr2020xman.github.io/Code-Quiz/
+
+### Authors
+
+- Original code by bootstrap used as framework
+- Code by \_Andr&eacute; Grech - 27/8/2020
+- CSS is a mixture of custom styles and Bootstrap presets to assist in responsiveness
+
+---
+
 © 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
