@@ -39,7 +39,13 @@ Link: https://agr2020xman.github.io/Code-Quiz/
 The HTML is created and removed dynamically through JavaScript. DOM targeting and other skills were important in this task. jQuery was utilised to simplify some of this targeting.
 The quiz is also modular - such that in it's current state, you may add infinite questions to the quiz, and adjust the extra time per question from 15s.
 
-Clear single-responsibility is assigned to most functions, with room to add more. The page is also responsive thanks to some help from Bootstrap.
+Clear single-responsibility is assigned to most functions, with room to add more in an effort to follow SOLID principles. The page is also responsive thanks to some help from Bootstrap.
+
+#### Tools 
+
+- [VScode](https://code.visualstudio.com/) - The editor of choice.
+- [jQuery](https://api.jquery.com/)
+- [Bootstrap](https://getbootstrap.com/)
 
 #### Sample of deployed application
 
@@ -62,6 +68,10 @@ _Highscores board_
 - Code by \_Andr&eacute; Grech - 11/9/2020
 - CSS is a mixture of custom styles and Bootstrap presets to assist in responsiveness
 
----
+#### License
 
-© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+- [MIT License](https://opensource.org/licenses/MIT)
+
+#### Acknowledgements
+
+- © 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
